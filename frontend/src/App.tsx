@@ -5,21 +5,34 @@ import allActions from './actions';
 import { Tile } from './components/tile';
 
 const App = () => {
-  const activeTile = useSelector((state: { tile: number }) => state.tile);
   const dispatch = useDispatch();
   /*
-     make mole appear automatically
       make sure to hide the other mole
-      2) find position of click
-         onClick: check if state.value === click.position
   * */
 
+  const randomNumber = (min: number, max: number) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  };
+  const move = () => dispatch(allActions.tileActions.setActiveTile(randomNumber(1, 12)));
+  const moveMole = () => {
+    setTimeout(() => {
+      move();
+      moveMole();
+    }, 2000);
+  };
+  useEffect(moveMole, []); // componentDidMount
+  //
+  const activeTile = useSelector((state: { tile: number }) => state.tile);
+  const score = useSelector((state: { score: number }) => state.score);
   const tiles = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((id: number) => (
     <Tile
       key={id}
       id={id}
       onClick={() => {
-        dispatch(allActions.tileActions.setActiveTile(id));
+        if (activeTile === id) {
+          dispatch(allActions.scoreActions.increaseScore());
+        }
+        move();
       }}
     />
   ));
@@ -45,7 +58,9 @@ const App = () => {
           marginRight: 'auto'
         }}>
         <div style={{ marginBottom: '20px' }}>
-          {activeTile ? 'active Tile is of id #' + activeTile : 'no tile selected'}
+          {activeTile ? 'active Tile is of id #' + activeTile : 'no tile active'}
+          <br />
+          score: {score}
         </div>
         <div className="tilesContainer">{tiles}</div>
       </div>{' '}
