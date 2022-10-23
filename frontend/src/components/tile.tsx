@@ -11,10 +11,11 @@ export function Tile(props: { onClick: any; id: number }) {
         backgroundImage: 'url(' + image + ')',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center center'
+        backgroundPosition: 'center center',
+        cursor: 'pointer'
       }}
       className={`tile ${isActive ? 'tileactive' : 'tileunactive'}`}
-      onClick={() => {
+      onClick={(e) => {
         props.onClick();
       }}></button>
   );
