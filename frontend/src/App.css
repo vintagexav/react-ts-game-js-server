@@ -37,3 +37,13 @@
     transform: translateY(0px);
   }
 }
+.tilesContainer {
+}
+.tile {
+  height:100px;
+  width:100px;
+}
+.tileactive {
+}
+.tileunactive {
+}
