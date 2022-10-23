@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
-import counter from '../reducers/tile';
+import tile from '../reducers/tile';
 const reducer = combineReducers({
-  counter
+  tile
 });
 const index = configureStore({
   reducer

@@ -5,25 +5,14 @@ import allActions from './actions';
 import { Tile } from './components/tile';
 
 const App = () => {
-  // const counter = useSelector((state: { counter: number }) => state.counter);
-  const activeTile = useSelector((state: { counter: number }) => state.counter);
-
+  const activeTile = useSelector((state: { tile: number }) => state.tile);
   const dispatch = useDispatch();
-
-  // const user = { name: 'Rei' };
-  //
-  // useEffect(() => {
-  //   dispatch(allActions.userActions.setUser(user));
-  // }, []);
-
   /*
-   make mole appear automatically
-    make sure to hide the other mole
-    2) find position of click
-       onClick: check if state.value === click.position
-
-
-    * */
+     make mole appear automatically
+      make sure to hide the other mole
+      2) find position of click
+         onClick: check if state.value === click.position
+  * */
 
   const tiles = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((id: number) => (
     <Tile
