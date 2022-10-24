@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './App.css';
 import allActions from './actions';
 import { Tile } from './components/tile';
-import { currentEpochSeconds, randomNumber } from './utils';
 import { Score } from './components/score';
 import { Time } from './components/time';
 
@@ -22,40 +21,6 @@ const App = () => {
       }}
     />
   ));
-
-  // const game = useSelector((state: { tile: number }) => state.tile);
-
-  /// START GAME ONCE
-  useEffect(() => {
-    dispatch(allActions.gameActions.startGame());
-  }, [dispatch]);
-
-  /// SET ONCE REFERENCE TIME
-  useEffect(() => {
-    dispatch(allActions.timeReferenceActions.setReferenceTime(currentEpochSeconds()));
-  }, [dispatch]);
-
-  /// COUNT TIME
-  const countTime = () => {
-    setTimeout(() => {
-      dispatch(allActions.timeActions.setTime(currentEpochSeconds()));
-      countTime();
-    }, 100);
-  };
-  useEffect(() => {
-    countTime();
-  }, [dispatch]);
-
-  /// MOVE MOLE
-  const moveMole = () => {
-    setTimeout(() => {
-      dispatch(allActions.tileActions.setActiveTile(randomNumber(1, 12)));
-      moveMole();
-    }, 2000);
-  };
-  useEffect(() => {
-    moveMole();
-  }, [dispatch]);
 
   ///
   const image = process.env.PUBLIC_URL + '/' + 'WAM_bg.jpg';
