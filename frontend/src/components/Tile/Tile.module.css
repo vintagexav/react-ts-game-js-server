@@ -1,0 +1,12 @@
+.tile {
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    object-fit: cover;
+    width:100px;
+    height:75px;
+    background-color: transparent;
+    margin: 25px;
+    border: none;
+    cursor: pointer
+}

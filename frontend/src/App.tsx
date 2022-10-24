@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import './App.css';
 import allActions from './actions';
-import { Tile } from './components/tile';
-import { Score } from './components/score';
-import { Time } from './components/time';
+import { Tile } from './components/Tile';
+import { Score } from './components/Score';
+import { Menu } from './components/Menu';
 import { Game } from './constants/config';
 
 const App = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    document.title = 'Whack-a-mole';
+  });
+
   const activeTile = useSelector(
     (state: { tile: { gameActive: boolean; activeTile: number } }) => state.tile
   );
@@ -38,7 +42,7 @@ const App = () => {
         backgroundPosition: 'top center'
       }}>
       <Score />
-      <Time />
+      <Menu />
       <div
         style={{
           paddingTop: '200px',

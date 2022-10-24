@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Game } from '../constants/config';
-import allActions from '../actions';
-import { currentEpochSeconds, randomNumber } from '../utils';
+import { Game } from '../../constants/config';
+import allActions from '../../actions';
+import { currentEpochSeconds, randomNumber } from '../../utils';
+import Modal from '../Modal';
 
-export function Time() {
+export function Menu() {
   const time = useSelector((state: { time: number }) => {
-    // console.log(JSON.stringify(state));
     return state.time;
   });
   const timeReference = useSelector((state: { timeReference: number }) => state.timeReference);
   const durationSeconds = Game.DURATION_SECONDS;
   const timeRemaining = durationSeconds + timeReference - time;
 
+  const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   return (
     <div
@@ -78,6 +79,7 @@ export function Time() {
               <br />
             </div>
             <button
+              onClick={() => setIsOpen(true)}
               style={{
                 backgroundColor: 'transparent',
                 border: 'none',
@@ -88,8 +90,9 @@ export function Time() {
                 // color: '#fb0',
                 textShadow: '0 0 5px #fff'
               }}>
-              Scores
+              Leaderboard
             </button>
+            {isOpen && <Modal setIsOpen={setIsOpen} />}
           </div>
         )}
       </div>

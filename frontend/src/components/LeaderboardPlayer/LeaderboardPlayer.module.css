@@ -1,0 +1,7 @@
+.player {
+  padding-right: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  margin-bottom:8px;
+}
