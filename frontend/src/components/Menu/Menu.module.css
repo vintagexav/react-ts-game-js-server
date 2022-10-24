@@ -1,0 +1,37 @@
+.c1 {
+  position: absolute;
+  left: 25px;
+  top: 100px;
+  font-weight: bold;
+  font-size: 30px;
+  text-shadow: 0 0 5px #fff;
+  text-Align: left;
+}
+
+.c2{
+  font-size: 20px;
+  color: red;
+  text-shadow: 0 0 5px #fff;
+}
+
+.c3 {
+  margin-left: 2px;
+}
+
+.c4 {
+  font-size: 20px;
+  color: red;
+  text-shadow: 0 0 5px #fff;
+  margin-top: 15px;
+}
+
+.c5 {
+
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: -4px;
+  font-weight: bold;
+  font-size: 30px;
+  text-shadow: 0 0 5px #fff;
+}

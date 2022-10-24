@@ -2,6 +2,8 @@ import { all, put, select, takeEvery } from 'redux-saga/effects';
 import allActions from '../actions';
 import { currentEpochSeconds, delay, randomNumber } from '../utils';
 import { Game, Mole } from '../constants/config';
+import { postNewScore } from '../controllers/postNewScore';
+// import { getCat } from '../controllers/getCat';
 
 // ENTITIES UTILS
 function* isGameActive() {
@@ -60,22 +62,22 @@ function* takeMoveMole() {
 
 // END GAME
 function* takeEndGame() {
-  yield takeEvery('END_GAME', function* (action: any) {
+  yield takeEvery('END_GAME', function* () {
     const score: number = yield select((state) => {
       return state.score;
     });
-    const name = prompt(`What's your name? Score: ${score}`);
-
-    yield put(allActions.userActions.setName(name || '', score));
+    if (score > 0) {
+      const name = prompt(`Score: ${score}\nWhat's your name?`);
+      yield put(allActions.userActions.setName(name || '', score));
+    } // otherwise maybe it's just game started automatically by loading website
   });
 }
 
 function* takeUserName() {
-  yield takeEvery('SET_NAME', function (action: any) {
+  yield takeEvery('SET_NAME', async (action: any) => {
     const name = action.payload.name;
     const score = action.payload.score;
-    alert(name);
-    alert(score);
+    postNewScore({ score, name });
   });
 }
 
@@ -87,7 +89,6 @@ function* firstMoveMole() {
 export default function* rootSaga() {
   yield all([
     setEpochTime(),
-    // selectingTimeReference(),<<
     updateTime(),
     takeSetTime(),
     firstMoveMole(),

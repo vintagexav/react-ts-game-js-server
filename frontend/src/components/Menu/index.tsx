@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Game } from '../../constants/config';
 import allActions from '../../actions';
 import { currentEpochSeconds, randomNumber } from '../../utils';
-import Modal from '../Modal';
+import Leaderboard from '../Leaderboard';
+import styles from './Menu.module.css';
 
 export function Menu() {
   const time = useSelector((state: { time: number }) => {
@@ -16,59 +17,21 @@ export function Menu() {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   return (
-    <div
-      style={{
-        position: 'absolute',
-        left: 25,
-        top: 100,
-        fontWeight: 'bold',
-        fontSize: '30px',
-        textShadow: '0 0 5px #fff',
-        textAlign: 'left'
-      }}>
-      <span
-        style={{
-          fontSize: '20px',
-          color: 'red',
-          textShadow: '0 0 5px #fff'
-        }}>
-        Time remaining
-      </span>
-      <div
-        style={{
-          marginLeft: '2px'
-        }}>
+    <div className={styles.c1}>
+      <span className={styles.c2}>Time remaining</span>
+      <div className={styles.c3}>
         {timeRemaining > 0 ? (
           <div>
-            <div style={{}}>
-              {timeRemaining > durationSeconds ? durationSeconds : timeRemaining}
-            </div>
+            <div>{timeRemaining > durationSeconds ? durationSeconds : timeRemaining}</div>
           </div>
         ) : (
           <div>
-            <div style={{}}>Game over</div>
+            <div>Game over</div>
 
-            <div
-              style={{
-                fontSize: '20px',
-                color: 'red',
-                textShadow: '0 0 5px #fff',
-                marginTop: '15px'
-              }}>
-              Menu
-            </div>
+            <div className={styles.c4}>Menu</div>
             <div>
               <button
-                style={{
-                  backgroundColor: 'transparent',
-                  border: 'none',
-                  cursor: 'pointer',
-                  marginLeft: '-4px',
-                  fontWeight: 'bold',
-                  fontSize: '30px',
-                  // color: '#fb0',
-                  textShadow: '0 0 5px #fff'
-                }}
+                className={styles.c5}
                 onClick={() => {
                   dispatch(allActions.scoreActions.resetScore());
                   dispatch(allActions.timeReferenceActions.setReferenceTime(currentEpochSeconds()));
@@ -78,21 +41,10 @@ export function Menu() {
               </button>
               <br />
             </div>
-            <button
-              onClick={() => setIsOpen(true)}
-              style={{
-                backgroundColor: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-                marginLeft: '-4px',
-                fontWeight: 'bold',
-                fontSize: '30px',
-                // color: '#fb0',
-                textShadow: '0 0 5px #fff'
-              }}>
+            <button onClick={() => setIsOpen(true)} className={styles.c5}>
               Leaderboard
             </button>
-            {isOpen && <Modal setIsOpen={setIsOpen} />}
+            {isOpen && <Leaderboard setIsOpen={setIsOpen} />}
           </div>
         )}
       </div>
