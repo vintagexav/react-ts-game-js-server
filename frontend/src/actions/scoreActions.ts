@@ -3,6 +3,7 @@ const increaseScore = () => {
     type: 'INCREASE_SCORE'
   };
 };
+
 const resetScore = () => {
   return {
     type: 'RESET_SCORE'

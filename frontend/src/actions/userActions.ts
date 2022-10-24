@@ -4,6 +4,7 @@ const setName = (name: string, score: number) => {
     payload: { name, score }
   };
 };
+
 export default {
   setName
 };

@@ -4,6 +4,7 @@ const setTime = (time: number) => {
     payload: time
   };
 };
+
 export default {
   setTime
 };

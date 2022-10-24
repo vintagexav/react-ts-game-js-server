@@ -1,7 +1,6 @@
 const endGame = () => {
   return {
     type: 'END_GAME'
-    // payload: {}
   };
 };
 

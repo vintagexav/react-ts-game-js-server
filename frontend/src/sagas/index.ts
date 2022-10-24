@@ -92,6 +92,5 @@ export default function* rootSaga() {
     takeMoveMole(),
     takeEndGame(),
     takeUserName()
-    //
   ]);
 }

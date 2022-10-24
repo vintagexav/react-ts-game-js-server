@@ -19,10 +19,12 @@ const reducer = combineReducers({
 });
 
 const sagaMiddleware = createSagaMiddleware();
+
 const index = configureStore({
   reducer: reducer,
   middleware: [sagaMiddleware]
 });
+
 sagaMiddleware.run(rootSaga);
 
 export default index;

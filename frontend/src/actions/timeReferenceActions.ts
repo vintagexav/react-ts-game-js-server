@@ -4,6 +4,7 @@ const setReferenceTime = (referenceTime: number) => {
     payload: referenceTime
   };
 };
+
 export default {
   setReferenceTime
 };
