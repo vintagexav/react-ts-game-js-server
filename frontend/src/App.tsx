@@ -5,31 +5,33 @@ import allActions from './actions';
 import { Tile } from './components/tile';
 import { Score } from './components/score';
 import { Time } from './components/time';
+import { Game } from './constants/config';
 
 const App = () => {
   const dispatch = useDispatch();
-  const activeTile = useSelector((state: { tile: number }) => state.tile);
-  const tiles = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((id: number) => (
+  const activeTile = useSelector(
+    (state: { tile: { gameActive: boolean; activeTile: number } }) => state.tile
+  );
+  const tiles = Array.from({ length: Game.AMOUNT_OF_TILES }, (v, k) => k + 1).map((id: number) => (
     <Tile
       key={id}
       id={id}
       onClick={() => {
-        if (activeTile === id) {
+        if (activeTile.activeTile === id) {
           dispatch(allActions.scoreActions.increaseScore());
-          dispatch(allActions.tileActions.setActiveTile(0));
+          dispatch(allActions.tileActions.setActiveTile(true, 0));
         }
       }}
     />
   ));
 
-  ///
   const image = process.env.PUBLIC_URL + '/' + 'WAM_bg.jpg';
   return (
     <div
       className="App"
       style={{
         height: '100%',
-        minHeight: '500px',
+        minHeight: '1000px',
         backgroundImage: 'url(' + image + ')',
         backgroundSize: 'cover', //contain will not stretch'contain',
         backgroundRepeat: 'no-repeat',
@@ -39,19 +41,16 @@ const App = () => {
       <Time />
       <div
         style={{
-          paddingTop: '50px',
+          paddingTop: '200px',
           paddingBottom: '100px',
-          maxWidth: '400px',
+          maxWidth: '600px',
           display: 'block',
           marginLeft: 'auto',
           marginRight: 'auto'
         }}>
-        <div style={{ marginBottom: '20px' }}>
-          {/*{activeTile ? 'active Tile is of id #' + activeTile : 'no tile active'}*/}
-          {/*<br />*/}
-        </div>
+        <div style={{ marginBottom: '20px' }}></div>
         <div className="tilesContainer">{tiles}</div>
-      </div>{' '}
+      </div>
     </div>
   );
 };

@@ -40,8 +40,13 @@
 .tilesContainer {
 }
 .tile {
-  height:100px;
+  /*background-size:fit;*/
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  object-fit: cover;
   width:100px;
+  height:75px;
 }
 .tileactive {
 }

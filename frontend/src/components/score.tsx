@@ -15,6 +15,7 @@ export function Score() {
       }}>
       <span
         style={{
+          fontSize: '20px',
           color: 'red',
           textShadow: '0 0 5px #fff'
         }}>
@@ -22,6 +23,7 @@ export function Score() {
       </span>
       <div
         style={{
+          marginLeft: '2px',
           textAlign: 'left'
         }}>
         {score}

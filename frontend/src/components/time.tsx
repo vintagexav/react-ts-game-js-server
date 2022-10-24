@@ -1,16 +1,19 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Game } from '../constants/config';
+import allActions from '../actions';
+import { currentEpochSeconds, randomNumber } from '../utils';
 
 export function Time() {
-  const time = useSelector((state: { time: number }) => state.time);
-  const gameStarted = useSelector((state: { game: boolean }) => state.game);
+  const time = useSelector((state: { time: number }) => {
+    // console.log(JSON.stringify(state));
+    return state.time;
+  });
   const timeReference = useSelector((state: { timeReference: number }) => state.timeReference);
   const durationSeconds = Game.DURATION_SECONDS;
   const timeRemaining = durationSeconds + timeReference - time;
-  if (timeRemaining < 0) {
-    console.log('FINIII');
-  }
+
+  const dispatch = useDispatch();
   return (
     <div
       style={{
@@ -19,26 +22,75 @@ export function Time() {
         top: 100,
         fontWeight: 'bold',
         fontSize: '30px',
-        textShadow: '0 0 5px #fff'
+        textShadow: '0 0 5px #fff',
+        textAlign: 'left'
       }}>
       <span
         style={{
+          fontSize: '20px',
           color: 'red',
           textShadow: '0 0 5px #fff'
         }}>
         Time remaining
       </span>
-      <br />={JSON.stringify(gameStarted)}=
       <div
         style={{
-          textAlign: 'left'
+          marginLeft: '2px'
         }}>
         {timeRemaining > 0 ? (
-          <span style={{}}>
-            {timeRemaining > durationSeconds ? durationSeconds : timeRemaining}{' '}
-          </span>
+          <div>
+            <div style={{}}>
+              {timeRemaining > durationSeconds ? durationSeconds : timeRemaining}
+            </div>
+          </div>
         ) : (
-          'Game over'
+          <div>
+            <div style={{}}>Game over</div>
+
+            <div
+              style={{
+                fontSize: '20px',
+                color: 'red',
+                textShadow: '0 0 5px #fff',
+                marginTop: '15px'
+              }}>
+              Menu
+            </div>
+            <div>
+              <button
+                style={{
+                  backgroundColor: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  marginLeft: '-4px',
+                  fontWeight: 'bold',
+                  fontSize: '30px',
+                  // color: '#fb0',
+                  textShadow: '0 0 5px #fff'
+                }}
+                onClick={() => {
+                  dispatch(allActions.scoreActions.resetScore());
+                  dispatch(allActions.timeReferenceActions.setReferenceTime(currentEpochSeconds()));
+                  dispatch(allActions.tileActions.setActiveTile(true, randomNumber()));
+                }}>
+                Restart
+              </button>
+              <br />
+            </div>
+            <button
+              style={{
+                backgroundColor: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                marginLeft: '-4px',
+                fontWeight: 'bold',
+                fontSize: '30px',
+                // color: '#fb0',
+                textShadow: '0 0 5px #fff'
+              }}>
+              Scores
+            </button>
+          </div>
         )}
       </div>
     </div>
