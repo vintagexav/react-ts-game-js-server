@@ -9,12 +9,12 @@ export const fetchTopPlayers = (
   fetch(`${ServicePlayers.BASE_URL}/players`)
     .then((response) => response.json())
     .then((data) => {
-      // console.log(data);
-      setTopPlayers(
-        data
-          .sort((p1: { score: number }, p2: { score: number }) => p1.score < p2.score)
-          .slice(0, 10)
-      );
+      const d = data
+        .sort(function (p1: { score: number }, p2: { score: number }) {
+          return p2.score - p1.score;
+        })
+        .slice(0, 10);
+      setTopPlayers(d);
       setLoading(false);
     })
     .catch((error) => {

@@ -35,7 +35,7 @@ export function Menu() {
                 onClick={() => {
                   dispatch(allActions.scoreActions.resetScore());
                   dispatch(allActions.timeReferenceActions.setReferenceTime(currentEpochSeconds()));
-                  dispatch(allActions.tileActions.setActiveTile(true, randomNumber()));
+                  dispatch(allActions.tileActions.setActiveTile(randomNumber()));
                 }}>
                 Restart
               </button>

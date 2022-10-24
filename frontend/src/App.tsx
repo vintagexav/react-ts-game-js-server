@@ -13,9 +13,7 @@ const App = () => {
     document.title = 'Whack-a-mole';
   });
 
-  const activeTile = useSelector(
-    (state: { tile: { gameActive: boolean; activeTile: number } }) => state.tile
-  );
+  const activeTile = useSelector((state: { tile: { activeTile: number } }) => state.tile);
   const tiles = Array.from({ length: Game.AMOUNT_OF_TILES }, (v, k) => k + 1).map((id: number) => (
     <Tile
       key={id}
@@ -23,7 +21,7 @@ const App = () => {
       onClick={() => {
         if (activeTile.activeTile === id) {
           dispatch(allActions.scoreActions.increaseScore());
-          dispatch(allActions.tileActions.setActiveTile(true, 0));
+          dispatch(allActions.tileActions.setActiveTile(0));
         }
       }}
     />

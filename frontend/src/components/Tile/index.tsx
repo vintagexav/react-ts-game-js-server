@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import styles from './Tile.module.css';
 
 export function Tile(props: { onClick: any; id: number }) {
-  const activeTile = useSelector((state: { tile: { gameActive: boolean; activeTile: number } }) => {
+  const activeTile = useSelector((state: { tile: { activeTile: number } }) => {
     return state.tile;
   });
   const isActive = activeTile.activeTile === props.id;

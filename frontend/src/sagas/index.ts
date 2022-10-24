@@ -3,7 +3,6 @@ import allActions from '../actions';
 import { currentEpochSeconds, delay, randomNumber } from '../utils';
 import { Game, Mole } from '../constants/config';
 import { postNewScore } from '../controllers/postNewScore';
-// import { getCat } from '../controllers/getCat';
 
 // ENTITIES UTILS
 function* isGameActive() {
@@ -43,18 +42,16 @@ function* selectingTimeReference() {
 function* takeMoveMole() {
   yield takeEvery(
     'SET_ACTIVE_TILE',
-    function* (action: { payload: { gameActive: boolean; activeTile: number }; type: string }) {
+    function* (action: { payload: { activeTile: number }; type: string }) {
       yield delay(Mole.MOVEMENT_SPEED_MS);
 
       if (!(yield isGameActive())) {
         if (action.payload.activeTile != Game.RESET_TILE_ID)
           yield put(allActions.gameActions.endGame());
-        yield put(
-          allActions.tileActions.setActiveTile(action.payload.gameActive, Game.RESET_TILE_ID)
-        );
+        yield put(allActions.tileActions.setActiveTile(Game.RESET_TILE_ID));
       } else if (action.payload.activeTile != Game.RESET_TILE_ID) {
         // const enteredName = prompt('Please enter your name');
-        yield put(allActions.tileActions.setActiveTile(action.payload.gameActive, randomNumber()));
+        yield put(allActions.tileActions.setActiveTile(randomNumber()));
       } //otherwise this is a reset action and should not be taken care of
     }
   );
@@ -82,7 +79,7 @@ function* takeUserName() {
 }
 
 function* firstMoveMole() {
-  yield put(allActions.tileActions.setActiveTile(true, randomNumber()));
+  yield put(allActions.tileActions.setActiveTile(randomNumber()));
 }
 
 // EXPORT

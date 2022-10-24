@@ -11,7 +11,6 @@ export const postNewScore = ({ score, name }: { score: number; name: string }) =
       name: name
     })
   }).then((r) => {
-    console.log(r);
     console.log('done');
   });
 };

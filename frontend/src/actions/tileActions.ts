@@ -1,7 +1,7 @@
-const setActiveTile = (gameActive: boolean, activeTileId: number) => {
+const setActiveTile = (activeTileId: number) => {
   return {
     type: 'SET_ACTIVE_TILE',
-    payload: { gameActive: gameActive, activeTile: activeTileId }
+    payload: { activeTile: activeTileId }
   };
 };
 
