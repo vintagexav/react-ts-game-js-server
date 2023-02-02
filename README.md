@@ -36,3 +36,4 @@ App will restart on each file change.
 ### `npm test`
 
 It uses jest to test endpoints.
+
